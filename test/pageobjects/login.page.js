@@ -1,5 +1,5 @@
 class LoginPage {
-    //Gettes
+    //Getters
     get inputUsername() { return $('#user-name')}
     get inputPassword () { return $('#password')}
     get btnLogin() { return $('#login-button')}
@@ -18,6 +18,9 @@ class LoginPage {
         await this.setUsername(username),
         await this.setPassword(password);
         await this.btnLogin.click();
+    }
+    open () {
+        return browser.url('http://www.saucedemo.com/');
     }
 }
 
