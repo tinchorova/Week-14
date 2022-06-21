@@ -2,10 +2,11 @@ const CartPage = require('../pageobjects/cart.page');
 const InventoryPage = require('../pageobjects/inventory.page');
 const HeaderPage = require('../pageobjects/header.page');
 const LoginPage = require('../pageobjects/login.page');
+const CheckoutOnePage = require('../pageobjects/checkoutOne.page');
 const CompleteOrderPage = require('../pageobjects/completeOrder.page');
 
 describe('Complete order tests', () => {
-    beforeAll('Locate in complete order page', () =>{
+    beforeAll('Locate in complete order page', async () => {
         await LoginPage.open();
         await LoginPage.login('standard_user', 'secret_sauce');
         await HeaderPage.btnCart.click();
@@ -16,19 +17,20 @@ describe('Complete order tests', () => {
     })
     describe('Verifying title is shown and correct', () => {
         it('Title is displayed', async () => {
-            await CompleteOrderPage.thankYouTitle.toBeDisplayed();
+            await CompleteOrderPage.thankYouTitle.isDisplayed();
         })
         it('Title is correct', async () => {
-            await CompleteOrderPage.thankYouTitle.toHaveText('THANK YOU FOR YOUR ORDER')
+            await expect(CompleteOrderPage.thankYouTitle).toHaveText('THANK YOU FOR YOUR ORDER')
         })
     })
     describe('Pony image should be displayed', () => {
-        await CompleteOrderPage.ponyImg.toBeDisplayed();
+        it('Pony image displayed', async () => {
+            await CompleteOrderPage.ponyImg.isDisplayed();
+        })
     })
     describe('Back home button', () => {
-        it('Button is clickable', async () =>{
-            await CompleteOrderPage.btnBackHome.toExist()
-            await expect(CompleteOrderPage.btnBackHome).isClickable()
+        it('Button exists', async () =>{
+            await expect(CompleteOrderPage.btnBackHome).toExist();
         })
         it('Clicking button', async () =>{
             await CompleteOrderPage.btnBackHome.click();
